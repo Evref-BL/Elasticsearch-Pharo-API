@@ -57,9 +57,9 @@ ELKSTermRangeQuery >> jsonableObject [
 	self gte ifNotNil: [ dic at: #gte put: self gte ].
 	self lt ifNotNil: [ dic at: #lt put: self lt ].
 	self lte ifNotNil: [ dic at: #lte put: self lte ].
-	
+
 	^ Dictionary new
-		  at: #range put: dic;
+		  at: #range put: { (self field -> dic) } asDictionary;
 		  yourself
 ]
 

@@ -28,6 +28,10 @@ ELKApi >> buildPath [
 	self subclassResponsibility
 ]
 
+{ #category : #api }
+ELKApi >> buildQueryBody [
+]
+
 { #category : #building }
 ELKApi >> buildQueryParameter [
 	znClient queryAt: #pretty put: self pretty
@@ -65,6 +69,7 @@ ELKApi >> performRequest [
 	znClient port: self port.
 	self buildPath.
 	self buildQueryParameter.
+	self buildQueryBody.
 	^ znClient post
 ]
 

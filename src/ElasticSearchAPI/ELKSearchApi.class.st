@@ -18,6 +18,14 @@ ELKSearchApi >> buildPath [
 ]
 
 { #category : #building }
+ELKSearchApi >> buildQueryBody [
+
+	self query ifNotNil: [ :queryEntity | 
+		znClient entity:
+			(ZnEntity json: (NeoJSONWriter toString: queryEntity jsonableObject)) ]
+]
+
+{ #category : #building }
 ELKSearchApi >> buildQueryParameter [
 
 	self size ifNotNil: [ :aSize | znClient queryAt: #size put: aSize ]
@@ -33,6 +41,18 @@ ELKSearchApi >> index [
 ELKSearchApi >> index: anObject [
 
 	index := anObject
+]
+
+{ #category : #accessing }
+ELKSearchApi >> query [
+
+	^ query
+]
+
+{ #category : #accessing }
+ELKSearchApi >> query: anObject [
+
+	query := anObject
 ]
 
 { #category : #accessing }
