@@ -6,7 +6,8 @@ Class {
 	#superclass : #ELKApi,
 	#instVars : [
 		'index',
-		'size'
+		'size',
+		'query'
 	],
 	#category : #ElasticSearchAPI
 }
