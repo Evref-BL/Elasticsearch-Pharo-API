@@ -18,6 +18,7 @@ Metacello new
 ```st
 
 api := ELKSearchApi new.
+api beHttp.
 api endpoint: 'localhost'.
 api port: 9200.
 api index: '.ds-traces-apm-default-2023.02.17-000001'.
