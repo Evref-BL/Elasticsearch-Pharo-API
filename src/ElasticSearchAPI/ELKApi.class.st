@@ -6,7 +6,8 @@ Class {
 		'apiKey',
 		'pretty',
 		'port',
-		'znClient'
+		'znClient',
+		'https'
 	],
 	#category : #ElasticSearchAPI
 }
@@ -21,6 +22,16 @@ ELKApi >> apiKey [
 ELKApi >> apiKey: anObject [
 
 	apiKey := anObject
+]
+
+{ #category : #accessing }
+ELKApi >> beHttp [
+	https := false
+]
+
+{ #category : #accessing }
+ELKApi >> beHttps [
+	https := true
 ]
 
 { #category : #building }
@@ -54,14 +65,23 @@ ELKApi >> initialize [
 
 	super initialize.
 	pretty := false.
-	port := 9200
+	port := 9200.
+	https := true
+]
+
+{ #category : #accessing }
+ELKApi >> isHttps [
+	^ https
 ]
 
 { #category : #api }
 ELKApi >> performRequest [
 
 	znClient := ZnEasy client.
-	znClient http.
+	self isHttps
+		ifTrue: [ znClient https ]
+		ifFalse: [ znClient http ].
+
 	znClient forJsonREST.
 	self apiKey ifNotNil: [ :anApiKey | 
 		znClient headerAt: #Authorization put: 'ApiKey ' , anApiKey ].
