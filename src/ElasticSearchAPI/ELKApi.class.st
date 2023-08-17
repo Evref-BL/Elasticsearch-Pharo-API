@@ -123,3 +123,9 @@ ELKApi >> resetClient [
 
 	znClient := ZnClient new
 ]
+
+{ #category : #accessing }
+ELKApi >> znClient [
+
+	^ znClient
+]
