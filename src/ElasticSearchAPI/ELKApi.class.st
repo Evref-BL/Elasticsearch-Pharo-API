@@ -66,7 +66,8 @@ ELKApi >> initialize [
 	super initialize.
 	pretty := false.
 	port := 9200.
-	https := true
+	https := true.
+	self resetClient
 ]
 
 { #category : #accessing }
@@ -77,13 +78,12 @@ ELKApi >> isHttps [
 { #category : #api }
 ELKApi >> performRequest [
 
-	znClient := ZnEasy client.
 	self isHttps
 		ifTrue: [ znClient https ]
 		ifFalse: [ znClient http ].
 
 	znClient forJsonREST.
-	self apiKey ifNotNil: [ :anApiKey | 
+	self apiKey ifNotNil: [ :anApiKey |
 		znClient headerAt: #Authorization put: 'ApiKey ' , anApiKey ].
 	znClient host: self endpoint.
 	znClient port: self port.
@@ -116,4 +116,10 @@ ELKApi >> pretty [
 ELKApi >> pretty: anObject [
 
 	pretty := anObject
+]
+
+{ #category : #accessing }
+ELKApi >> resetClient [
+
+	znClient := ZnClient new
 ]
