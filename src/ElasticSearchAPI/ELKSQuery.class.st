@@ -1,3 +1,6 @@
+"
+Elasticsearch provides a full [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) (Domain Specific Language) based on JSON to define queries.
+"
 Class {
 	#name : #ELKSQuery,
 	#superclass : #Object,
