@@ -1,5 +1,31 @@
 "
 Elasticsearch exposes [REST APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html) that can be called directly to configure and access Elasticsearch features.
+
+## Important
+
+By default, `beHttps` and `beHttp` update the port accordingly to `443` and `80` 
+
+## Usage Example
+
+```st
+api := ELKSearchApi new.
+api beHttps.
+api endpoint: 'elasticsearch.mySubDomain.domain.com'.
+api index: 'myIndex'.
+api apiKey: 'myAPIKey=='.
+api size: 10.
+api query: (ELKSQuery new
+			 query: (ELKSTermRangeQuery new
+					field: '@timestamp';
+					gte: '2023-08-10';
+					lte: '2023-08-12'	;				
+					format: 'year_month_day');
+					yourself).
+
+api performRequest
+```
+
+
 "
 Class {
 	#name : #ELKApi,
@@ -29,12 +55,22 @@ ELKApi >> apiKey: anObject [
 
 { #category : #accessing }
 ELKApi >> beHttp [
-	https := false
+
+	https := false.
+	self port: 80
 ]
 
 { #category : #accessing }
 ELKApi >> beHttps [
-	https := true
+
+	https := true.
+	self port: 443
+]
+
+{ #category : #accessing }
+ELKApi >> beHttpsWithCertificate: aCertificatePath [
+	https := true.
+	znClient certificate: aCertificatePath
 ]
 
 { #category : #building }
@@ -68,8 +104,7 @@ ELKApi >> initialize [
 
 	super initialize.
 	pretty := false.
-	port := 9200.
-	https := true.
+	self beHttp.
 	self resetClient
 ]
 
