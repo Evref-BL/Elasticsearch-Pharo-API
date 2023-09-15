@@ -14,7 +14,10 @@ Class {
 
 { #category : #building }
 ELKSearchApi >> buildPath [
-	znClient path: self index , '/_search'
+
+	self index
+		ifNotNil: [ :idx | znClient path: idx , '/_search' ]
+		ifNil: [ znClient path: '_search' ]
 ]
 
 { #category : #building }
