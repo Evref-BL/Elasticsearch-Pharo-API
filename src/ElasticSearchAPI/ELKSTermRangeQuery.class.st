@@ -51,7 +51,7 @@ ELKSTermRangeQuery >> gte: anObject [
 	gte := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'handling - json' }
 ELKSTermRangeQuery >> jsonableObject [
 
 	| dic |

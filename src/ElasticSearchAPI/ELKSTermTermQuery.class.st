@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'val',
 		'boost',
-		'case_insensitive'
+		'case_insensitive',
+		'value'
 	],
 	#category : #'ElasticSearchAPI-Query'
 }
@@ -33,9 +34,9 @@ ELKSTermTermQuery >> boost [
 ]
 
 { #category : #accessing }
-ELKSTermTermQuery >> boost: anObject [
+ELKSTermTermQuery >> boost: aNumber [
 
-	boost := anObject
+	boost := aNumber
 ]
 
 { #category : #accessing }
@@ -45,21 +46,21 @@ ELKSTermTermQuery >> case_insensitive [
 ]
 
 { #category : #accessing }
-ELKSTermTermQuery >> case_insensitive: anObject [
+ELKSTermTermQuery >> case_insensitive: aBoolean [
 
-	case_insensitive := anObject
+	case_insensitive := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : #'handling - json' }
 ELKSTermTermQuery >> jsonableObject [
 
 	| dic |
 	dic := Dictionary new.
-	self val ifNil: [
+	self val ifNil: [ 
 		Error signal:
 			'value is required with an ' , self class name , ' query' ].
 	dic at: #value put: self val.
-	self case_insensitive ifNotNil: [ :ci |
+	self case_insensitive ifNotNil: [ :ci | 
 		dic at: #case_insensitive put: ci ].
 	self boost ifNotNil: [ :ci | dic at: #boost put: ci ].
 
@@ -67,13 +68,13 @@ ELKSTermTermQuery >> jsonableObject [
 ]
 
 { #category : #accessing }
-ELKSTermTermQuery >> val [
+ELKSTermTermQuery >> value [
 
-	^ val
+	^ value
 ]
 
 { #category : #accessing }
-ELKSTermTermQuery >> val: anObject [
+ELKSTermTermQuery >> value: aString [
 
-	val := anObject
+	val := aString
 ]

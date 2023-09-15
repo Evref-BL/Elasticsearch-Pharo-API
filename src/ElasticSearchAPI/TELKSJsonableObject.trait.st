@@ -3,7 +3,7 @@ Trait {
 	#category : #'ElasticSearchAPI-Query'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'handling - json' }
 TELKSJsonableObject >> jsonableObject [
 
 	self subclassResponsibility

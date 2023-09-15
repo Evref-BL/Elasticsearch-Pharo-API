@@ -7,27 +7,33 @@ Class {
 	#traits : 'TELKSJsonableObject',
 	#classTraits : 'TELKSJsonableObject classTrait',
 	#instVars : [
-		'query'
+		'filter'
 	],
 	#category : #'ElasticSearchAPI-Query'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
+ELKSQuery >> addFilter: aQuery [
+
+	self filter add: aQuery
+]
+
+{ #category : #accessing }
+ELKSQuery >> filter [
+
+	^ filter ifNil: [ filter := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+ELKSQuery >> filter: aCollectionOfQueries [
+
+	filter := aCollectionOfQueries asCollection
+]
+
+{ #category : #'handling - json' }
 ELKSQuery >> jsonableObject [
 
-	^ Dictionary new
-		  at: #query put: self query jsonableObject;
-		  yourself
-]
-
-{ #category : #accessing }
-ELKSQuery >> query [
-
-	^ query
-]
-
-{ #category : #accessing }
-ELKSQuery >> query: anObject [
-
-	query := anObject
+	^ Dictionary with:
+		  'query' -> (Dictionary with: 'bool' -> (Dictionary with:
+				    'filter' -> (self filter collect: #jsonableObject as: Array)))
 ]

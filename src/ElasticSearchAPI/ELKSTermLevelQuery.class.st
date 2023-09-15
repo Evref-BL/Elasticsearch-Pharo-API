@@ -20,7 +20,7 @@ ELKSTermLevelQuery >> field [
 ]
 
 { #category : #accessing }
-ELKSTermLevelQuery >> field: anObject [
+ELKSTermLevelQuery >> field: aString [
 
-	field := anObject
+	field := aString
 ]
