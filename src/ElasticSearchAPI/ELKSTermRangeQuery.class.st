@@ -1,3 +1,7 @@
+"
+The [range query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html) returns documents that contain terms within a provided range.
+When the `field` parameter is a date field data type, you can use [date math](https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#date-math) with the following parameters: `gt`, `gte`, `lt` and `lte`.
+"
 Class {
 	#name : #ELKSTermRangeQuery,
 	#superclass : #ELKSTermLevelQuery,

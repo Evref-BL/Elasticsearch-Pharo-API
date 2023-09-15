@@ -1,3 +1,6 @@
+"
+Elasticsearch exposes [REST APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html) that can be called directly to configure and access Elasticsearch features.
+"
 Class {
 	#name : #ELKApi,
 	#superclass : #Object,
