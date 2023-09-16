@@ -7,7 +7,6 @@ Class {
 	#name : #ELKSTermTermQuery,
 	#superclass : #ELKSTermLevelQuery,
 	#instVars : [
-		'val',
 		'boost',
 		'case_insensitive',
 		'value'
@@ -56,10 +55,10 @@ ELKSTermTermQuery >> jsonableObject [
 
 	| dic |
 	dic := Dictionary new.
-	self val ifNil: [ 
+	self value ifNil: [ 
 		Error signal:
 			'value is required with an ' , self class name , ' query' ].
-	dic at: #value put: self val.
+	dic at: #value put: self value.
 	self case_insensitive ifNotNil: [ :ci | 
 		dic at: #case_insensitive put: ci ].
 	self boost ifNotNil: [ :ci | dic at: #boost put: ci ].
@@ -76,5 +75,5 @@ ELKSTermTermQuery >> value [
 { #category : #accessing }
 ELKSTermTermQuery >> value: aString [
 
-	val := aString
+	value := aString
 ]

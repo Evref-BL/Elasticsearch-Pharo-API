@@ -78,7 +78,7 @@ ELKApi >> buildPath [
 	self subclassResponsibility
 ]
 
-{ #category : #api }
+{ #category : #building }
 ELKApi >> buildQueryBody [
 ]
 
